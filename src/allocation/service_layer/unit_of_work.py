@@ -29,10 +29,28 @@ class AbstractUnitOfWork(abc.ABC):
 
     @abc.abstractmethod
     def _commit(self):
+        """
+        Commit the current unit of work.
+
+        This method is part of the Unit of Work pattern, as it ensures
+        that all changes made during the unit of work are persisted to
+        the database. This helps maintain consistency and ensures that
+        all changes are only committed if the unit of work is
+        successfully completed.
+        """
         raise NotImplementedError
 
     @abc.abstractmethod
     def rollback(self):
+        """
+        Rollback the current unit of work.
+
+        This method is part of the Unit of Work pattern, as it ensures
+        that all changes made during the unit of work are discarded if
+        the unit of work is not successfully completed. This helps
+        maintain consistency and ensures that no partial changes are
+        persisted to the database.
+        """
         raise NotImplementedError
 
 
@@ -58,7 +76,25 @@ class SqlAlchemyUnitOfWork(AbstractUnitOfWork):
         self.session.close()
 
     def _commit(self):
+        """
+        Commit the current unit of work.
+
+        This method is part of the Unit of Work pattern, as it ensures
+        that all changes made during the unit of work are persisted to
+        the database. This helps maintain consistency and ensures that
+        all changes are only committed if the unit of work is
+        successfully completed.
+        """
         self.session.commit()
 
     def rollback(self):
+        """
+        Rollback the current unit of work.
+
+        This method is part of the Unit of Work pattern, as it ensures
+        that all changes made during the unit of work are discarded if
+        the unit of work is not successfully completed. This helps
+        maintain consistency and ensures that no partial changes are
+        persisted to the database.
+        """
         self.session.rollback()
