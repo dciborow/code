@@ -24,16 +24,40 @@ class AbstractRepository(abc.ABC):
             self.seen.add(product)
         return product
 
-    @abc.abstractmethod
     def _add(self, product: model.Product):
+        """
+        Add a product to the repository.
+
+        This method is part of the Unit of Work pattern, as it ensures
+        that the product is added to the repository as part of the unit
+        of work's commit process. This helps maintain consistency and
+        ensures that the product is only added if the unit of work is
+        successfully committed.
+        """
         raise NotImplementedError
 
-    @abc.abstractmethod
     def _get(self, sku) -> model.Product:
+        """
+        Get a product from the repository by SKU.
+
+        This method is part of the Unit of Work pattern, as it ensures
+        that the product is retrieved from the repository as part of the
+        unit of work's commit process. This helps maintain consistency
+        and ensures that the product is only retrieved if the unit of
+        work is successfully committed.
+        """
         raise NotImplementedError
 
-    @abc.abstractmethod
     def _get_by_batchref(self, batchref) -> model.Product:
+        """
+        Get a product from the repository by batch reference.
+
+        This method is part of the Unit of Work pattern, as it ensures
+        that the product is retrieved from the repository as part of the
+        unit of work's commit process. This helps maintain consistency
+        and ensures that the product is only retrieved if the unit of
+        work is successfully committed.
+        """
         raise NotImplementedError
 
 
